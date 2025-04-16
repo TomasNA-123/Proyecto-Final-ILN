@@ -28,5 +28,5 @@ dist-ssr
 
 # Virtual env
 
-/env/
+env/
 .env
