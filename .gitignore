@@ -30,3 +30,10 @@ dist-ssr
 
 env/
 .env
+
+# Backend
+back-proyecto-ILN/__pycache__/
+back-proyecto-ILN/src/__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
