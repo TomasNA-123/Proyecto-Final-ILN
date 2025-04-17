@@ -4,8 +4,6 @@ from dotenv import load_dotenv
 import os
 import google.generativeai as genai
 
-
-
 app = Flask(__name__)
 CORS(app)
 
@@ -25,8 +23,7 @@ def gemini():
 
     genai.configure(api_key = GEMINI_API_KEY)
 
-
-    model = genai.GenerativeModel('gemini-1.5-flash-latest')
+    model = genai.GenerativeModel('gemini-2.0-flash-lite')
 
     response = model.generate_content(consulta)
 
