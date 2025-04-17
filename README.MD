@@ -20,11 +20,21 @@ para activar el entorno virtual se usa el comando:
 -	source env/bin/activate
 
 #### Variables de entorno
-Además, se utilizan variables de entorno para guardar la apikey de Gemini, se dejo un fichero llamado .env-example este fichero se tiene que renombrar a .env e indicar la apikey.
+Para el correcto funcionamiento del backend, es necesario configurar las variables de entorno que contienen las API keys de Gemini y Foursquare. Sigue estos pasos:
+
+1. Crea un archivo `.env` en la carpeta `back-proyecto-ILN`
+2. Configura las siguientes variables en el archivo:
+   ```
+   GEMINI-API-KEY="tu-api-key-de-gemini"
+   FOURSQUARE-API-KEY="tu-api-key-de-foursquare"
+   ```
+3. Obtén las API keys en:
+   - Gemini API key: https://aistudio.google.com/app/apikey
+   - Foursquare API key: https://developer.foursquare.com/
 
 #### Importar librerias
-Las librerías Python utilizadas para el back se encuentran en el archivo freeze.txt para instalar todas las librerías con un solo comando en terminal se puede utilizar el comando:
--	pip install -r freeze.txt
+Las librerías Python utilizadas para el back se encuentran en el archivo requirements.txt para instalar todas las librerías con un solo comando en terminal se puede utilizar el comando:
+-	pip install -r requirements.txt
 
 #### Ejecutar API
 por último, para ejecutar el api se utiliza el comando:

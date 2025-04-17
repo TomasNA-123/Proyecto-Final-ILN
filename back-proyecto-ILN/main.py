@@ -1,33 +1,25 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
-import os
-import google.generativeai as genai
+from src import RestaurantRecommender
 
 app = Flask(__name__)
 CORS(app)
-
 load_dotenv()
 
-@app.route('/')
-def hello_world():
-    return "Hello World"
+# Initialize recommender
+recommender = RestaurantRecommender()
 
-@app.route('/gemini', methods=['POST'])
-def gemini():
-
+@app.route('/restaurants', methods=['POST'])
+def restaurants():
     data = request.get_json()
-    consulta = data.get("consulta")
+    prompt = data.get("prompt")
 
-    GEMINI_API_KEY = os.getenv('GEMINI-API-KEY')
-
-    genai.configure(api_key = GEMINI_API_KEY)
-
-    model = genai.GenerativeModel('gemini-2.0-flash-lite')
-
-    response = model.generate_content(consulta)
-
-    return {"response": response.text}
+    try:
+        recommendation_result = recommender.process_prompt(prompt)
+        return jsonify(recommendation_result)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

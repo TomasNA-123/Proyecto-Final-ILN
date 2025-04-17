@@ -6,25 +6,26 @@ import Carrusel from './Carrusel'; './Carrusel.jsx'
 function App() {
 
   const [cards, set_cards] = useState([]);
-  const [consulta, set_consulta] = useState('');
+
+  const [prompt, set_prompt] = useState('');
   const [loading, setLoading] = useState(false);
 
   const enviarNombre = async () => {
     try {
       setLoading(true);
-      const res = await fetch('http://localhost:5000/gemini', {
+      const res = await fetch('http://localhost:5000/restaurants', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ consulta }),
+        body: JSON.stringify({ prompt }),
       });
 
       const data = await res.json();
       set_cards(
         [...cards, {"datos": data.response}]
-        
       );
+      
     } catch (error) {
       console.error('Error al enviar nombre:', error);
     } finally {
@@ -40,11 +41,12 @@ function App() {
         </h2>
 
         <div id='contenedor_input'>
-          <input type="text" id="input_busqueda" onChange={(e) => set_consulta(e.target.value)} autocomplete="off"></input>
-          <button id='btn_buscar' onClick={enviarNombre} disabled={loading}>
-            {loading ? 'Cargando...' : 'Buscar'}
+          <input type="text" id="input_busqueda" onChange={(e) => set_prompt(e.target.value)} autocomplete="off"></input>
+          <button id='btn_buscar' onClick={enviarNombre} disabled={loading || prompt === ''}>
+            {loading ? 'Cargando...' : 'Recomendar'}
           </button>
         </div>
+
       </div>
 
       <div>
