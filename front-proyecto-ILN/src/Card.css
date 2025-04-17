@@ -2,6 +2,39 @@
     width: 100%;
     height: 200px;
     max-width: 350px;
-    background-color: aqua;
+    min-width: 300px;
+    background-color: rgb(227, 227, 227);
     border-radius: 20px;
+    border: 1px solid black;
+}
+
+#titulo_card{
+    margin-top: 10px;
+    
+}
+
+#titulo_card h3{
+    margin-bottom: 10px;
+}
+
+#estellas_card{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+#lista_estellas{
+    color: yellow;
+}
+
+#location_card{
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+#texto_location{
+    font-size: 12px;
 }

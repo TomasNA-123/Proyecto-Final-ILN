@@ -42,6 +42,8 @@ class RestaurantService:
         for item in search_results.get("results", []):
             fsq_id = item["fsq_id"]
             name = item["name"]
+
+            # print(item)
             
             # Get location information
             location = item.get("location", {})
@@ -68,4 +70,5 @@ class RestaurantService:
         
         # Sort restaurants by rating
         restaurants.sort(key=lambda x: x["rating"], reverse=True)
+
         return restaurants 

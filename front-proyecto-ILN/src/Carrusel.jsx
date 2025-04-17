@@ -5,7 +5,6 @@ import Card from './Card.jsx';
 
 function Carrusel({ cards }){
 
-
     return (
         <>
             <div id='carrusel'>

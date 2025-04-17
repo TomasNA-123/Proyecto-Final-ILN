@@ -26,7 +26,7 @@ class FoursquareClient:
             "query": query_encoded,
             "categories": FOURSQUARE_RESTAURANTS_CATEGORY,
             "near": location_encoded,
-            "sort": sort
+            # "sort": sort
         }
         
         response = requests.get(url, headers=self.headers, params=params)

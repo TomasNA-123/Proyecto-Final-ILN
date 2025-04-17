@@ -16,8 +16,13 @@ class GeminiClient:
         try:
             response = self.model.generate_content(analysis_prompt)
             # Parse the JSON response
+
+            # print(analysis_prompt)
+
+            # print("------------------")
+            # print(response.text)
             try:
-                return json.loads(response.text)
+                return response.text
             except json.JSONDecodeError:
                 raise Exception("Error parsing Gemini's response as JSON")
         except Exception as e:

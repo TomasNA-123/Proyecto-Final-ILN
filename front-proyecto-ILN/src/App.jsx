@@ -22,8 +22,9 @@ function App() {
       });
 
       const data = await res.json();
+      console.log(data)
       set_cards(
-        [...cards, {"datos": data.response}]
+        data
       );
       
     } catch (error) {
