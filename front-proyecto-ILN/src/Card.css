@@ -1,0 +1,7 @@
+.card_restaurante{
+    width: 100%;
+    height: 200px;
+    max-width: 350px;
+    background-color: aqua;
+    border-radius: 20px;
+}

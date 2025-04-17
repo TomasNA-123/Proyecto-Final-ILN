@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import './App.css'
 
+import Carrusel from './Carrusel'; './Carrusel.jsx'
+
 function App() {
 
-  const [texto_gemini, set_texto_gemini] = useState('');
+  const [cards, set_cards] = useState([]);
   const [consulta, set_consulta] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -19,7 +21,10 @@ function App() {
       });
 
       const data = await res.json();
-      set_texto_gemini(data.response);
+      set_cards(
+        [...cards, {"datos": data.response}]
+        
+      );
     } catch (error) {
       console.error('Error al enviar nombre:', error);
     } finally {
@@ -33,10 +38,13 @@ function App() {
         <h2>
           ¿Que estas buscando?
         </h2>
-        <input type="text" id="input_busqueda" onChange={(e) => set_consulta(e.target.value)}></input>
-        <button id='btn_buscar' onClick={enviarNombre} disabled={loading}>
-          {loading ? 'Cargando...' : 'Buscar'}
-        </button>
+
+        <div id='contenedor_input'>
+          <input type="text" id="input_busqueda" onChange={(e) => set_consulta(e.target.value)} autocomplete="off"></input>
+          <button id='btn_buscar' onClick={enviarNombre} disabled={loading}>
+            {loading ? 'Cargando...' : 'Buscar'}
+          </button>
+        </div>
       </div>
 
       <div>
@@ -46,7 +54,9 @@ function App() {
           </div>
         ) : (
           <h4 style={{ color: 'black' }}>
-            {texto_gemini}
+            <div id="carrusel_restaurantes">
+              <Carrusel cards={cards}></Carrusel>
+            </div>
           </h4>
         )}
       </div>
