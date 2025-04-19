@@ -62,6 +62,7 @@ class RestaurantService:
             avg_rating = analyze_ratings(tips)
             
             restaurants.append({
+                "fsq_id": fsq_id,
                 "name": name,
                 "location": formatted_location,
                 "tips": tips,

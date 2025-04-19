@@ -22,28 +22,28 @@ class RestaurantRecommender:
             return []
             
         # Then analyze tips with Gemini
-        # try:
-        #     tips_analysis = self.gemini_client.analyze_restaurant_tips(prompt, restaurant_results)
-        #     # tips_analysis = json.dumps(tips_analysis)
-        # except Exception as e:
-        #     print(f"Error al analizar los tips: {str(e)}")
-        #     raise ValueError(f"Error al analizar los tips: {str(e)}")
+        try:
+            tips_analysis = self.gemini_client.analyze_restaurant_tips(prompt, restaurant_results)
             
+        except Exception as e:
+            print(f"Error al analizar los tips: {str(e)}")
+            raise ValueError(f"Error al analizar los tips: {str(e)}")
+
         # Combine the results
         
         final_results = []
         for restaurant in restaurant_results:
             # Find the corresponding tips analysis
-            # analysis = next(
-            #     (item["tips_analysis"] for item in tips_analysis 
-            #      if item["fsq_id"] == restaurant["fsq_id"]),
-            #     "No analysis available."
-            # )
+            analysis = next(
+                (item["tips_analysis"] for item in tips_analysis 
+                 if item["fsq_id"] == restaurant["fsq_id"]),
+                "No analysis available."
+            )
             
             final_results.append({
                 "name": restaurant["name"],
                 "location": restaurant["location"],
-                # "tips_analysis": analysis,
+                "tips_analysis": analysis,
                 "rating": restaurant["rating"]
             })
             

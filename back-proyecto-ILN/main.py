@@ -18,9 +18,7 @@ def restaurants():
 
     try:
         recommendation_result = recommender.process_prompt(prompt)
-        print("===========")
-        print(recommendation_result)
-        print(type(recommendation_result))
+        
         return json.dumps(recommendation_result)
         # return recommendation_result
     except Exception as e:
