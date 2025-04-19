@@ -42,7 +42,7 @@ function App() {
         </h2>
 
         <div id='contenedor_input'>
-          <input type="text" id="input_busqueda" onChange={(e) => set_prompt(e.target.value)} autocomplete="off"></input>
+          <input type="text" id="input_busqueda" onChange={(e) => set_prompt(e.target.value)} autoComplete="off"></input>
           <button id='btn_buscar' onClick={enviarNombre} disabled={loading || prompt === ''}>
             {loading ? 'Cargando...' : 'Recomendar'}
           </button>

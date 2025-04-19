@@ -38,3 +38,10 @@
 #texto_location{
     font-size: 12px;
 }
+
+#analysis_card{
+    width: 90%;
+    text-overflow: ellipsis;
+    margin: auto;
+    margin-top: 5px;
+}
