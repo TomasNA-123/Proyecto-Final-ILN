@@ -41,12 +41,16 @@ class GeminiClient:
         prompt_template = f"""
             Analyze the following restaurant tips based on this user request: "{original_prompt}"
             The user's request is in {prompt_lang} language, so please provide your analysis in {prompt_lang} language.
-            For each restaurant, provide a brief analysis (maximum two sentences) focusing on aspects relevant to the user's request.
-
+            For each restaurant, provide a brief analysis (maximum one sentences) focusing on aspects relevant to the user's request. 
+            If the user's request is positive, provide a positive analysis, if the user's request is negative, provide a negative analysis.
+            If the user's request is neutral, provide a neutral analysis.
+            Dont provide a comment about the relation between the restaurant and the user's request (e.g. "The restaurant's tips don't mention the user's request").
+            Dont include phrases like "Based on the user's request" or "In the context of the user's request".
             In the format:
             "fsq_id": "<restaurant_id>" , "tips_analysis": "<your maximum two-sentence analysis in {prompt_lang} language> | ..."
 
             If you quote a text use ' instead of "
+            if the restaurant doesn't have any tips, in the tips_analysis field, write "The restaurant doesn't have any tips".
             Only return the plain text result
         """
         

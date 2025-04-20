@@ -2,7 +2,7 @@ import stanza
 import langid
 from transformers import pipeline
 import torch
-from .config import SENTIMENT_MODEL, RATING_MODEL
+from .config import SENTIMENT_MODEL_EN, SENTIMENT_MODEL_ES, RATING_MODEL
 
 # Monkey patch torch.load for compatibility with PyTorch 2.6+
 original_torch_load = torch.load
@@ -14,12 +14,13 @@ torch.load = patched_torch_load
 # NLP pipelines 
 nlp_en = None
 nlp_es = None
-sentiment_pipeline_global = None
+sentiment_pipeline_en_global = None
+sentiment_pipeline_es_global = None
 rating_pipeline_global = None
 
 def initialize_pipelines():
     """Initialize all NLP pipelines only if they haven't been initialized yet"""
-    global nlp_en, nlp_es, sentiment_pipeline_global, rating_pipeline_global
+    global nlp_en, nlp_es, sentiment_pipeline_en_global, sentiment_pipeline_es_global, rating_pipeline_global
     
     # Initialize stanza pipelines
     if nlp_en is None or nlp_es is None:
@@ -28,8 +29,10 @@ def initialize_pipelines():
         nlp_es = stanza.Pipeline(lang='es', processors='tokenize,ner,pos,mwt,lemma')
     
     # Initialize transformers pipelines
-    if sentiment_pipeline_global is None:
-        sentiment_pipeline_global = pipeline(model=SENTIMENT_MODEL)
+    if sentiment_pipeline_en_global is None:
+        sentiment_pipeline_en_global = pipeline(model=SENTIMENT_MODEL_EN)
+    if sentiment_pipeline_es_global is None:
+        sentiment_pipeline_es_global = pipeline(model=SENTIMENT_MODEL_ES)
     
     if rating_pipeline_global is None:
         rating_pipeline_global = pipeline(model=RATING_MODEL)
@@ -62,12 +65,15 @@ def extract_nouns(doc):
                 nouns.append(word.lemma)
     return nouns
 
-def analyze_sentiment(text):
+def analyze_sentiment(text, lang):
     """Analyze the sentiment of the input text."""
-    global sentiment_pipeline_global
+    global sentiment_pipeline_en_global, sentiment_pipeline_es_global
     
-    result = sentiment_pipeline_global(text)
-    return 'desc' if result[0]['label'] == 'positive' else 'asc'
+    if lang == 'en':
+        result = sentiment_pipeline_en_global(text)
+    else:
+        result = sentiment_pipeline_es_global(text)
+    return result[0]['label']
 
 def analyze_ratings(tips):
     """Analyze the ratings of tips using multilingual BERT."""

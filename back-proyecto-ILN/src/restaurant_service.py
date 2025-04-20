@@ -25,17 +25,17 @@ class RestaurantService:
         # Extract relevant information
         locations = extract_locations(doc)
         nouns = extract_nouns(doc)
-        sort_order = analyze_sentiment(prompt)
+        sort_order = analyze_sentiment(prompt, lang)
         
         # Search for places
-        search_results = self.foursquare_client.search_places(nouns, locations, sort_order)
+        search_results = self.foursquare_client.search_places(nouns, locations)
         
         # Process results and get tips
-        restaurants_with_tips = self._process_search_results(search_results)
+        restaurants_with_tips = self._process_search_results(search_results, sort_order)
         
         return restaurants_with_tips
 
-    def _process_search_results(self, search_results):
+    def _process_search_results(self, search_results, sort_order):
         """Process search results and gather tips for each restaurant."""
         restaurants = []
         
@@ -69,7 +69,11 @@ class RestaurantService:
                 "rating": avg_rating
             })
         
+
         # Sort restaurants by rating
-        restaurants.sort(key=lambda x: x["rating"], reverse=True)
+        if sort_order == "negative":
+            restaurants.sort(key=lambda x: x["rating"], reverse=False)
+        else:
+            restaurants.sort(key=lambda x: x["rating"], reverse=True)
 
         return restaurants 

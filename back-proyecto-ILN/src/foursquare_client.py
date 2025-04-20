@@ -13,7 +13,7 @@ class FoursquareClient:
             "Authorization": FOURSQUARE_API_KEY
         }
 
-    def search_places(self, query_terms, locations, sort="RATING"):
+    def search_places(self, query_terms, locations):
         """Search for places using the Foursquare API."""
         query_string = ", ".join(query_terms)
         query_encoded = quote(query_string)
@@ -25,11 +25,11 @@ class FoursquareClient:
         params = {
             "query": query_encoded,
             "categories": FOURSQUARE_RESTAURANTS_CATEGORY,
-            "near": location_encoded,
-            # "sort": sort
+            "near": location_encoded
         }
         
         response = requests.get(url, headers=self.headers, params=params)
+
         return response.json()
 
     def get_place_tips(self, fsq_id):
