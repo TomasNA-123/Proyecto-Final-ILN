@@ -36,7 +36,7 @@ function App() {
 
   return (
     <>
-      <div class="input_central">
+      <div className="input_central">
         <h2>
           ¿Que estas buscando?
         </h2>

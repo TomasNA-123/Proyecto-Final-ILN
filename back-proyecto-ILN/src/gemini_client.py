@@ -16,16 +16,16 @@ class GeminiClient:
         try:
             response = self.model.generate_content(analysis_prompt)
 
-            response_split = response.text.split(" | ")
+            response_split = response.text.split("|")
             json_output = ""
 
             for item in response_split:
-                json_output += f"{{{item}}},"
+                if item.strip() != "":
+                    json_output += f"{{{item.strip()}}},"
             
             json_output = f"[{json_output[:-1]}]"
 
             json_output = json.loads(json_output)
-
             try:            
 
                 return json_output
@@ -47,7 +47,7 @@ class GeminiClient:
             Dont provide a comment about the relation between the restaurant and the user's request (e.g. "The restaurant's tips don't mention the user's request").
             Dont include phrases like "Based on the user's request" or "In the context of the user's request".
             In the format:
-            "fsq_id": "<restaurant_id>" , "tips_analysis": "<your maximum two-sentence analysis in {prompt_lang} language> | ..."
+            "fsq_id": "<restaurant_id>" , "tips_analysis": "<your maximum two-sentence analysis in {prompt_lang} language>" |
 
             If you quote a text use ' instead of "
             if the restaurant doesn't have any tips, in the tips_analysis field, write "The restaurant doesn't have any tips".

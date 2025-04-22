@@ -42,8 +42,6 @@ class RestaurantService:
         for item in search_results.get("results", []):
             fsq_id = item["fsq_id"]
             name = item["name"]
-
-            # print(item)
             
             # Get location information
             location = item.get("location", {})
@@ -60,13 +58,17 @@ class RestaurantService:
             
             # Calculate average rating from tips
             avg_rating = analyze_ratings(tips)
+
+            # Get photos for the restaurant
+            photos = self.foursquare_client.get_place_photos(fsq_id)
             
             restaurants.append({
                 "fsq_id": fsq_id,
                 "name": name,
                 "location": formatted_location,
                 "tips": tips,
-                "rating": avg_rating
+                "rating": avg_rating,
+                "photos": photos
             })
         
 

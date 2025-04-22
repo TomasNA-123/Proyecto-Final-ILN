@@ -1,11 +1,11 @@
 .card_restaurante{
     width: 100%;
-    height: 200px;
-    max-width: 350px;
+    max-width: 80%;
     min-width: 300px;
-    background-color: rgb(227, 227, 227);
+    background-color: #E1E5F2;
     border-radius: 20px;
-    border: 1px solid black;
+    /* border: 1px solid #022B3A; */
+    box-shadow: 4px 4px 2px #022B3A6d;
 }
 
 #titulo_card{
@@ -15,6 +15,7 @@
 
 #titulo_card h3{
     margin-bottom: 10px;
+    font-size: 25px;
 }
 
 #estellas_card{
@@ -25,6 +26,7 @@
 
 #lista_estellas{
     color: yellow;
+    text-shadow: 1px 1px 2px #022B3A;
 }
 
 #location_card{
@@ -44,4 +46,8 @@
     text-overflow: ellipsis;
     margin: auto;
     margin-top: 5px;
+}
+
+.imgs_card{
+    padding: 10px;
 }

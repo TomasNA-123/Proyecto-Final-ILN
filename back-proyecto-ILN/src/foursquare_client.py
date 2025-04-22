@@ -37,3 +37,8 @@ class FoursquareClient:
         url = f"{FOURSQUARE_BASE_URL}/places/{fsq_id}/tips"
         response = requests.get(url, headers=self.headers)
         return response.json() 
+    
+    def get_place_photos(self, fsq_id):
+        url = f"{FOURSQUARE_BASE_URL}/places/{fsq_id}/photos?limit=5"
+        response = requests.get(url, headers=self.headers)
+        return response.json()

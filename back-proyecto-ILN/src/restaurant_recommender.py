@@ -44,7 +44,8 @@ class RestaurantRecommender:
                 "name": restaurant["name"],
                 "location": restaurant["location"],
                 "tips_analysis": analysis,
-                "rating": restaurant["rating"]
+                "rating": restaurant["rating"],
+                "photos": restaurant["photos"]
             })
             
         return final_results 

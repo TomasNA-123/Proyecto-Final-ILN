@@ -1,0 +1,38 @@
+.contenedor_img{
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.contenedor_img img{
+    width: 100%;;
+}
+
+.contenedor_img button{
+    position: absolute;
+    width: 40px;
+    height: 40px;    
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    border-radius: 20px;
+    font-size: 20px;
+    background: #022b386d;
+    color: #e1e5f26d;
+}
+
+.contenedor_img button:hover{
+    background: #022B38;
+    color: #E1E5F2;
+}
+
+.contenedor_img button.btn_img_atras{
+    top: calc(50% - 20px);
+    left: 10px;
+}
+
+.contenedor_img button.btn_img_adelante{
+    top: calc(50% - 20px);
+    right: 10px;
+}

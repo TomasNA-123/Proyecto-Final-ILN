@@ -1,4 +1,5 @@
 import './Card.css';
+import Card_Imgs from './Card_Imgs';
 
 function Card({data}){
 
@@ -6,10 +7,10 @@ function Card({data}){
 
     let iconos_estrellas = Array.from({length: 5}, (_, i) => {
         return  i+1 <= estrellas
-            ? <i className='bx bxs-star'></i>
+            ? <i className='bx bxs-star' key={"estrella_" + i}></i>
             : i < estrellas 
-                ? <i className='bx bxs-star-half' ></i>
-                : <i className='bx bx-star' ></i>
+                ? <i className='bx bxs-star-half' key={"media_estrella_" + i}></i>
+                : <i className='bx bx-star' key={"sin_estrella_" + i}></i>
     });
     
 
@@ -32,8 +33,14 @@ function Card({data}){
                         {data.location}
                     </div>
                 </div>
+
+                <hr></hr>
+
                 <div id='analysis_card'>
                     {data.tips_analysis}
+                </div>
+                <div className='imgs_card'>
+                    <Card_Imgs imgs={data.photos}></Card_Imgs>
                 </div>
             </div>
         </>

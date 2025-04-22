@@ -1,5 +1,6 @@
 #carrusel{
-    display: flex;
-    gap: 10px;
-    overflow: scroll;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    row-gap: 10px;
 }
