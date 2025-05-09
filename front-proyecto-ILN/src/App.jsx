@@ -23,12 +23,17 @@ function App() {
 
       const data = await res.json();
       console.log(data)
-      set_cards(
-        data
-      );
+      if(!data.hasOwnProperty("error")){
+        set_cards(
+          data
+        );
+      }
       
     } catch (error) {
       console.error('Error al enviar nombre:', error);
+      set_cards(
+        []
+      );
     } finally {
       setLoading(false);
     }
